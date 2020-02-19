@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo</title>
+</head>
+<body>
+<div id="total"></div>
+<div id="id"></div>
+<div id="data" style="background-color: grey;"></div>
+<script type="text/javascript">
+    var ws = new WebSocket("ws://127.0.0.1:9501/");
+    ws.onopen = function () {
+        ws.send("hello");
+    };
+    ws.onmessage = function (resp) {
+        var package = JSON.parse(resp.data);
+        document.getElementById('total').innerHTML = package['total'];
+        document.getElementById('id').innerHTML = package['id'];
+        document.getElementById('data').innerHTML = package['data'];
+	};
+	ws.onclose = function () {};
+</script>
+
+</body>
+</html>
